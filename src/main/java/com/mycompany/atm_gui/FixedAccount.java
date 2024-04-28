@@ -16,51 +16,54 @@ public class FixedAccount extends Accounts {
     public FixedAccount() {
         _contractPeriod = 30; //assumming that the initial contract days is 30 days
         interestRate = 20; //initial interest amouunt set to 20
-        _earlyWithdrawn = true;
+        _earlyWithdrawn = false;
         accountType = AccountTypes.fixed;
         pin = "4444";
     }
 
-     /**
+    /**
      * This is the method which is used to withdraw money in Cheque Account
+     *
      * @param amountWithdrawed
      * @return double amount which has been withdrawed from account
      */
     protected double withdrawMoney(double amountWithdrawed) { //method to withdraw money from the account
 
         if (_earlyWithdrawn == false) { //if the account holder withdraws money after the contracted period
-            if (amountWithdrawed <= availableBalance) {
-                availableBalance -= amountWithdrawed;
-
-            } else {
-                System.out.println("Sorry, Your request cannot be processed");
-            }
-            return amountWithdrawed;
-        } else { // if the account holder withdraws money before the contracted period
-            System.out.println("You're withdrawing money before the contracted period, so this will yield no interest");
-            if (_earlyWithdrawn == false) {
-                if (amountWithdrawed <= availableBalance) {
+            if (amountWithdrawed <= availableBalance && amountWithdrawed != 0) {
+                if (checkWithdrawValidation(amountWithdrawed)) {
                     availableBalance -= amountWithdrawed;
-
+                    return amountWithdrawed;
                 } else {
-                    System.out.println("Sorry, Your request cannot be processed");
+                    throw new IllegalArgumentException("Please check the available balance and the withdraw limit to continue this transaction. ");
                 }
 
+            } else {
+                throw new IllegalArgumentException("Please check the available balance to continue. \n Note: Amount withdrawing cannot be zero");
+            }
+
+        } else { // if the account holder withdraws money before the contracted period
+            System.out.println("You're withdrawing money before the contracted period, so this will yield no interest");
+
+            if (amountWithdrawed <= availableBalance) {
+                availableBalance -= amountWithdrawed;
+                return amountWithdrawed;
+
+            } else {
+                throw new IllegalArgumentException("Please check the available balance to continue.");
             }
 
         }
-        return amountWithdrawed;
     }
 
-
-    protected double calculateInterest() {
+    private double _calculateInterest() {
         if (_earlyWithdrawn == false) {
-            interestAmount = (availableBalance * interestRate) / 100;
+            interestAmount = _contractPeriod * (availableBalance * (interestRate / 100) / 365);
+            return interestAmount;
         } else {
-            System.out.println("Sorry, You're not eligible for interest as you are withdrawing before the contracted period");
+            throw new IllegalArgumentException("Sorry, You're not eligible for interest as you are withdrawing before the contracted period");
         }
 
-        return interestAmount;
     }
 
     protected void isEarlyWithdrawan(int days) {
@@ -74,26 +77,26 @@ public class FixedAccount extends Accounts {
 
     @Override
     protected double sumUpInterest() {
-        if (_earlyWithdrawn == false) {
-            availableBalance += interestAmount;
 
+        if (_earlyWithdrawn == false) {
+            availableBalance += _calculateInterest();
+            return availableBalance;
         } else {
-            System.out.println("Sorry you're not eligible for any interest as you're withdrawing earlier than the contracted period");
+            throw new IllegalArgumentException("Sorry, You cannot get interest until contract period is reached");
 
         }
-
-        return availableBalance;
     }
 
     protected int changeContractPeriod(int newContractPeriod) {
         if (newContractPeriod >= 30) {
             _contractPeriod = newContractPeriod;
             System.out.println("Contract period changed successfully");
+            return _contractPeriod;
 
         } else {
-            System.out.println("Contract Period cannot be less than 30 days"); //assuming 30 days is the minimun period for any contract to happen
+            throw new IllegalArgumentException("Contract Period cannot be less than 30 days"); //assuming 30 days is the minimun period for any contract to happen
         }
-        return _contractPeriod;
+
     }
 
 }

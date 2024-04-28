@@ -3,14 +3,17 @@
  */
 package com.mycompany.atm_gui;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 /**
  *
@@ -23,7 +26,7 @@ public class ATM_GUI extends JFrame {
     FixedAccount fixedAccount1 = new FixedAccount();
     ChequeAccount chequeAccount1 = new ChequeAccount();
 
-    private enum State {
+    private enum State { // the following enum is used to store the state in the program
         loggedin, PINasked, loggedout, depositing, withdrawing
     };
     State currentState = State.loggedout;
@@ -42,11 +45,16 @@ public class ATM_GUI extends JFrame {
          */
         JFrame myFrame = new JFrame(); //main display frame
         myFrame.setLayout(new GridBagLayout());
-        myFrame.setSize(400, 600);
+        myFrame.setSize(450, 600);
+        myFrame.setBackground(Color.red);
+//        myFrame.getContentPane().setBackground(Color.darkGray);
         myFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2);
         JTextArea informationPanel = new JTextArea("");
         informationPanel.setText("Welcome!!");
+        informationPanel.setBackground(Color.LIGHT_GRAY);
+        informationPanel.setBorder(border);
         informationPanel.setLineWrap(true);
         informationPanel.setEditable(false);
 
@@ -66,8 +74,10 @@ public class ATM_GUI extends JFrame {
         myFrame.add(informationPanel, gbc);
 
         JTextArea instructionPanel = new JTextArea("");
-        instructionPanel.setText("Click HELP button for \"how to use information\" ");
+        instructionPanel.setText("Click HELP button for \"how to use information\". ");
         instructionPanel.setLineWrap(true);
+        instructionPanel.setBorder(border);
+        instructionPanel.setBackground(Color.LIGHT_GRAY);
         instructionPanel.setEditable(false);
 
         gbc.gridx = 0;
@@ -80,6 +90,7 @@ public class ATM_GUI extends JFrame {
 
         JTextArea numberPanel = new JTextArea("");
         numberPanel.setLineWrap(true);
+        numberPanel.setBorder(border);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -88,7 +99,10 @@ public class ATM_GUI extends JFrame {
         gbc.weighty = 0.18;
         myFrame.add(numberPanel, gbc);
 
+        Border border1 = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1);
         JButton btn1 = new JButton("1");
+        btn1.setBorder(border);
+        btn1.setBackground(Color.black);
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,6 +120,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn1, c1);
 
         JButton btn2 = new JButton("2");
+        btn2.setBorder(border);
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -123,6 +138,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn2, c2);
 
         JButton btn3 = new JButton("3");
+        btn3.setBorder(border);
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -139,7 +155,8 @@ public class ATM_GUI extends JFrame {
 
         myFrame.add(btn3, c3);
 
-        JButton btnWdrw = new JButton("Withdraw");
+        JButton btnWdrw = new JButton("Withdraw");  
+//        btnWdrw.setBorder(border);
         btnWdrw.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -161,6 +178,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnWdrw, cWdrw);
 
         JButton btn4 = new JButton("4");
+        btn4.setBorder(border);
         btn4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -177,6 +195,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn4, c4);
 
         JButton btn5 = new JButton("5");
+        btn5.setBorder(border);
         btn5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -193,6 +212,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn5, c5);
 
         JButton btn6 = new JButton("6");
+        btn6.setBorder(border);
         btn6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -208,6 +228,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn6, c6);
 
         JButton btnDepo = new JButton("Deposit");
+//        btnDepo.setBorder(border);
         btnDepo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -228,6 +249,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnDepo, cDepo);
 
         JButton btn7 = new JButton("7");
+        btn7.setBorder(border);
         btn7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -244,6 +266,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn7, c7);
 
         JButton btn8 = new JButton("8");
+        btn8.setBorder(border);
         btn8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -259,6 +282,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn8, c8);
 
         JButton btn9 = new JButton("9");
+        btn9.setBorder(border);
         btn9.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -275,6 +299,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn9, c9);
 
         JButton btnBalance = new JButton("Balance Check");
+//        btnBalance.setBorder(border);
         btnBalance.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -310,6 +335,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnBalance, cBalance);
 
         JButton btn0 = new JButton("0");
+        btn0.setBorder(border);
         btn0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -326,6 +352,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btn0, c0);
 
         JButton btnDot = new JButton(".");
+        btnDot.setBorder(border);
         btnDot.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -342,6 +369,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnDot, cDot);
 
         JButton btnCLR = new JButton("CLEAR");
+        btnCLR.setBorder(border);
         btnCLR.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -357,6 +385,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnCLR, cCLR);
 
         JButton btnEnter = new JButton("ENTER");
+//        btnEnter.setBorder(border);
         btnEnter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -405,80 +434,100 @@ public class ATM_GUI extends JFrame {
                         instructionPanel.setText("Sorry, Depositing amount is not valid");
 
                     }
-                    if (depositingAmount > 0) {
-                        if (currentAccount.equals(AccountType.savings)) {
-                            instructionPanel.setText("Success!! Amount of " + savingsAccount1.depositMoney(depositingAmount) + "$ has successfully been deposited");
 
-                        } else if (currentAccount.equals(AccountType.netsavings)) {
-                            instructionPanel.setText("Success!! Amount of " + netSavingsAccount1.depositMoney(depositingAmount) + "$ has successfully been deposited");
+                    if (currentAccount.equals(AccountType.savings)) {
+                        try {
+                            double depositedAmount = savingsAccount1.depositMoney(depositingAmount);
+                            instructionPanel.setText("Success!! Amount of " + depositedAmount + "$ has successfully been deposited");
 
-                        } else if (currentAccount.equals(AccountType.cheque)) {
-                            instructionPanel.setText("Success!! Amount of " + chequeAccount1.depositMoney(depositingAmount) + "$ has successfully been deposited");
+                        } catch (IllegalArgumentException ex) {
+                            ex.getMessage();
+                        }
 
-                        } else if (currentAccount.equals(AccountType.fixed)) {
-                            instructionPanel.setText("Success!! Amount of " + fixedAccount1.depositMoney(depositingAmount) + "$ has successfully been deposited");
+                    } else if (currentAccount.equals(AccountType.netsavings)) {
+                        try {
+                            double depositedAmount = netSavingsAccount1.depositMoney(depositingAmount);
+                            instructionPanel.setText("Success!! Amount of " + depositedAmount + "$ has successfully been deposited");
 
-                        } else {
-                            instructionPanel.setText("Your Request cannot be processed");
+                        } catch (IllegalArgumentException ex) {
+                            ex.getMessage();
+                        }
+                    } else if (currentAccount.equals(AccountType.cheque)) {
+                        try {
+                            double depositedAmount = chequeAccount1.depositMoney(depositingAmount);
+                            instructionPanel.setText("Success!! Amount of " + depositedAmount + "$ has successfully been deposited");
 
+                        } catch (IllegalArgumentException ex) {
+                            ex.getMessage();
+                        }
+                    } else if (currentAccount.equals(AccountType.fixed)) {
+                        try {
+                            double depositedAmount = fixedAccount1.depositMoney(depositingAmount);
+                            instructionPanel.setText("Success!! Amount of " + depositedAmount + "$ has successfully been deposited");
+
+                        } catch (IllegalArgumentException ex) {
+                            ex.getMessage();
                         }
                     } else {
-                        instructionPanel.setText("Please enter a valid deposit amount. \nNumbers greater than 0 is only valid.");
+                        instructionPanel.setText("Your Request cannot be processed");
+
                     }
 
                     numberPanel.setText("");
 
                 } else if (currentState.equals(State.withdrawing)) {
                     String withdrawingAmountStr = numberPanel.getText();
-                    if (withdrawingAmountStr != "0") {
-                        double withdrawingAmount = 0;
-                        double withdrawedValue;
+                    double withdrawingAmount = 0;
+                    double withdrawedValue;
 
+                    try {
+                        withdrawingAmount = Double.parseDouble(withdrawingAmountStr);
+                    } catch (NumberFormatException ex) {
+                        instructionPanel.setText("Sorry, Withdrawing amount is not valid");
+
+                    }
+
+                    if (currentAccount.equals(AccountType.savings)) {
                         try {
-                            withdrawingAmount = Double.parseDouble(withdrawingAmountStr);
-                        } catch (NumberFormatException ex) {
-                            instructionPanel.setText("Sorry, Withdrawing amount is not valid");
+                            withdrawedValue = savingsAccount1.withdrawMoney(withdrawingAmount);
+                            instructionPanel.setText("Success!! Amount of " + withdrawedValue + "$ has successfully been Withdrawed from your account");
 
+                        } catch (IllegalArgumentException ex) {
+                            instructionPanel.setText(ex.getMessage());
+                        }
+//                            
+                    } else if (currentAccount.equals(AccountType.netsavings)) {
+                        try {
+                            withdrawedValue = netSavingsAccount1.withdrawMoney(withdrawingAmount);
+                            instructionPanel.setText("Success!! Amount of " + withdrawedValue + "$ has successfully been Withdrawed from your account");
+
+                        } catch (IllegalArgumentException ex) {
+                            instructionPanel.setText(ex.getMessage());
                         }
 
-                        if (currentAccount.equals(AccountType.savings)) {
-                            withdrawedValue = savingsAccount1.withdrawMoney(withdrawingAmount);
-                            if (withdrawedValue > 0) {
-                                instructionPanel.setText("Success!! Amount of " + withdrawedValue + "$ has successfully been Withdrawed from your account");
-                            } else {
-                                instructionPanel.setText("Sorry, Your request cannot be processed. \nPlease check your available balance and amount withdrawing ");
-                            }
-                        } else if (currentAccount.equals(AccountType.netsavings)) {
-                            withdrawedValue = netSavingsAccount1.withdrawMoney(withdrawingAmount);
-                            if (withdrawedValue > 0) {
-                                instructionPanel.setText("Success!! Amount of " + withdrawedValue + "$ has successfully been Withdrawed from your account");
-                            } else {
-                                instructionPanel.setText("Sorry, Your request cannot be processed. \nPlease check your available balance and amount withdrawing ");
-                            }
-                        } else if (currentAccount.equals(AccountType.cheque)) {
+//                           
+                    } else if (currentAccount.equals(AccountType.cheque)) {
+                        try {
                             withdrawedValue = chequeAccount1.withdrawMoney(withdrawingAmount);
-                            if (withdrawedValue > 0) {
-                                instructionPanel.setText("Success!! Amount of " + chequeAccount1.withdrawMoney(withdrawingAmount) + "$ has successfully been Withdrawed from your account");
-                            } else {
-                                instructionPanel.setText("Sorry, Your request cannot be processed. \nPlease check your available balance and amount withdrawing ");
+                            instructionPanel.setText("Success!! Amount of " + withdrawedValue + "$ has successfully been Withdrawed from your account");
 
-                            }
-                        } else if (currentAccount.equals(AccountType.fixed)) {
-                            withdrawedValue = savingsAccount1.withdrawMoney(withdrawingAmount);
-                            if (withdrawedValue > 0) {
-                                instructionPanel.setText("Success!! Amount of " + fixedAccount1.withdrawMoney(withdrawingAmount) + "$ has successfully been Withdrawed from your account");
+                        } catch (IllegalArgumentException ex) {
+                            instructionPanel.setText(ex.getMessage());
+                        }
 
-                            } else {
-                                instructionPanel.setText("Sorry, Your request cannot be processed. \nPlease check your available balance and amount withdrawing ");
+                    } else if (currentAccount.equals(AccountType.fixed)) {
 
-                            }
-                        } else {
-                            instructionPanel.setText("Your Request cannot be processed");
+                        try {
+                            withdrawedValue = fixedAccount1.withdrawMoney(withdrawingAmount);
+                            instructionPanel.setText("Success!! Amount of " + withdrawedValue + "$ has successfully been Withdrawed from your account");
 
+                        } catch (IllegalArgumentException ex) {
+                            instructionPanel.setText(ex.getMessage());
                         }
 
                     } else {
-                        instructionPanel.setText("Withdrawing amount cannot be zero");
+                        instructionPanel.setText("Your Request cannot be processed");
+
                     }
 
                 }
@@ -497,13 +546,13 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnEnter, cENTER);
 
         JButton btnCancel = new JButton("CANCEL");
+//        btnCancel.setBorder(border);
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                instructionPanel.setText("");
+                instructionPanel.setText("Click \"Help\" button for \"How to use information \" ");
                 numberPanel.setText("");
-                currentState = State.loggedin;
 
             }
         });
@@ -518,6 +567,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnCancel, cCancel);
 
         JButton btnHelp = new JButton("HELP");
+//        btnHelp.setBorder(border);
         btnHelp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -540,6 +590,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnHelp, cHelp);
 
         JButton btnLogIn = new JButton("LOG IN");
+//        btnLogIn.setBorder(border);
         btnLogIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -560,6 +611,7 @@ public class ATM_GUI extends JFrame {
         myFrame.add(btnLogIn, cLin);
 
         JButton btnLogOut = new JButton("LOG OUT");
+//        btnLogOut.setBorder(border);
         btnLogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -12,6 +12,9 @@ public class SavingsAccount extends Accounts {
 
     private double withdrawLimit;
 
+    /**
+     * Constructor
+     */
     public SavingsAccount() {
         interestRate = 1;  //assuming that the daily calculated interest rate is 1 percent
         withdrawLimit = 1000; // assuming the initial withdraw limit to 1000 
@@ -19,7 +22,14 @@ public class SavingsAccount extends Accounts {
         pin = "0000";
     }
 
+    /**
+     * This method is used to set withdraw limit in the savings account
+     *
+     * @param limitAmount
+     * @return
+     */
     protected double setWithdrawLimit(double limitAmount) {
+
         if (limitAmount > 0) {
             this.withdrawLimit = limitAmount;
             return withdrawLimit;
@@ -28,25 +38,31 @@ public class SavingsAccount extends Accounts {
         }
     }
 
-     /**
+    /**
      * This is the method which is used to withdraw money in Cheque Account
+     *
      * @param amountWithdrawed
      * @return double amount which has been withdrawed from account
      */
     public double withdrawMoney(double amountWithdrawed) { //method to withdraw money from the account
+
         if (amountWithdrawed >= 0) {
             if (amountWithdrawed <= availableBalance && amountWithdrawed <= withdrawLimit) {
-                availableBalance -= amountWithdrawed;
-                return amountWithdrawed;
+                if (checkWithdrawValidation(amountWithdrawed)) {
+                    availableBalance -= amountWithdrawed;
+                    return amountWithdrawed;
+
+                } else {
+                    throw new IllegalArgumentException("Withdraw amount cannot be disposed in 20s, 50s & 100s. \n Please select different amount to continue");
+                }
 
             } else {
-                System.out.println("Sorry, Your request cannot be processed");
-                return 0;
+                throw new IllegalArgumentException("Please check your available balance and the withdraw limit to continue");
+
             }
         } else {
             throw new IllegalArgumentException("Amount deposited should be a non negative integer");
         }
 
     }
-
 }

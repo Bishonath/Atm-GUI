@@ -15,27 +15,30 @@ public class ChequeAccount extends Accounts {
         pin = "3333";
     }
 
-
-
     /**
      * This is the method which is used to withdraw money in Cheque Account
+     *
      * @param amountWithdrawed
      * @return double amount which has been withdrawed from account
      */
     protected double withdrawMoney(double amountWithdrawed) { //method to withdraw money from the account
-        if (amountWithdrawed >= 0) {
-            if (amountWithdrawed <= availableBalance) {
-                availableBalance -= amountWithdrawed;
 
+        if (amountWithdrawed >= 0) {
+            if (checkWithdrawValidation(amountWithdrawed)) {
+                if (amountWithdrawed <= availableBalance) {
+                    availableBalance -= amountWithdrawed;
+                    return amountWithdrawed;
+
+                } else {
+                    System.out.println("Sorry, Your request cannot be processed");
+                    return 0;
+                }
             } else {
-                System.out.println("Sorry, Your request cannot be processed");
-                return 0;
+                throw new IllegalArgumentException("Please enter a different amount");
             }
         } else {
             throw new IllegalArgumentException("Withdraw amount can only be non negative integer");
         }
-
-        return amountWithdrawed;
 
     }
 
